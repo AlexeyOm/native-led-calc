@@ -27,10 +27,10 @@ class RepoList extends Component {
   );
   render() {
     const { repos } = this.props;
-    console.log('was selected' + this.props.selectedCabinet);
+    //console.log('was selected' + this.props.selectedCabinet);
     return (
       <FlatList
-        styles={styles.container}
+        style={styles.container}
         data={repos}
         renderItem={this.renderItem}
       />

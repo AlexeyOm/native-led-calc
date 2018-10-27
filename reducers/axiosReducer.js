@@ -5,9 +5,28 @@ import {combineReducers} from 'redux'
 export const GET_REPOS = 'led-calc/repos/LOAD';
 export const GET_REPOS_SUCCESS = 'led-calc/repos/LOAD_SUCCESS';
 export const GET_REPOS_FAIL = 'led-calc/repos/LOAD_FAIL';
-export const SELECT_CABINET = 'led-calc/repos/SELECT_CABINET'
+export const SELECT_CABINET = 'led-calc/repos/SELECT_CABINET';
+export const CHANGE_WIDTH = 'led-calc/CHANGE_WIDTH';
+export const CHANGE_HEIGHT = 'led-calc/CHANGE_HEIGHT';
 
-export function reducerA(state = { repos: [], loading: false, selectedCabinet: 0}, action) {
+const defaultState = {
+  repos: [],
+  loading: false,
+  selectedCabinet: 0,
+  width: 0,
+  height: 0,
+}
+
+
+export function reducerA(state = {
+  repos: [],
+  loading: false,
+  selectedCabinet: 0,
+  width: 0,
+  height: 0,
+}, action) {
+
+  //console.log(state);
   switch (action.type) {
     case GET_REPOS:
       return { ...state, loading: true };
@@ -21,7 +40,13 @@ export function reducerA(state = { repos: [], loading: false, selectedCabinet: 0
         error: 'Error while fetching repositories'
       };
     case SELECT_CABINET:
-      return {...state, selectedCabinet: action.payload}
+      return {...state, selectedCabinet: action.payload};
+
+    case CHANGE_WIDTH:
+      return {...state, width: (state.width + action.payload < 0) ? 0 : state.width + action.payload}; 
+
+    case CHANGE_HEIGHT:
+      return {...state, height: (state.height + action.payload < 0) ? 0 : state.height + action.payload};
     default:
       return state;
   }
@@ -43,6 +68,20 @@ export function selectCabinet(cabinetID) {
   return {
     type: SELECT_CABINET,
     payload: cabinetID
+  }
+}
+
+export function changeWidth(amount){
+  return {
+    type: CHANGE_WIDTH,
+    payload: amount,
+  }
+}
+
+export function changeHeight(amount){
+  return {
+    type: CHANGE_HEIGHT,
+    payload: amount,
   }
 }
 

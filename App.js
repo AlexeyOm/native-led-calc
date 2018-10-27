@@ -8,6 +8,8 @@ import axiosMiddleware from 'redux-axios-middleware';
 
 import {reducer} from './reducers/axiosReducer';
 import RepoList from './RepoList';
+import Result from './Result';
+import SizeSelector from './SizeSelector';
 
 //console.log(reducer.toString());
 
@@ -27,7 +29,9 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
+          <Result />
           <RepoList />
+          <SizeSelector />
         </View>
       </Provider>
     );
@@ -37,6 +41,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 14,
     backgroundColor: '#fff',
   },
 });
