@@ -15,7 +15,7 @@ class Result extends Component {
           Ширина - ${this.props.cabinet.width * this.props.width} мм
           Высота - ${this.props.cabinet.height * this.props.height} мм
           `  
-        :'No cabinet selected'}
+        :'No cabinet selected!'}
       </Text>
 
     );
