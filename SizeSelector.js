@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-
+import NaviBar from 'react-native-pure-navigation-bar';
 import { changeWidth, changeHeight } from './reducers/axiosReducer';
 //console.log(listRepos.toString())
 
@@ -12,6 +12,10 @@ class SizeSelector extends Component {
     
      return (
         <View style={{flex:1, justifyContent: 'flex-start'}}>
+            <NaviBar
+                title='CustomTitle'
+            />
+
             <View style={styles.container}>
                 <TouchableOpacity onPress = {() => {this.props.changeWidth(-1)}}>
                     <Text style = {styles.button}> - </Text>

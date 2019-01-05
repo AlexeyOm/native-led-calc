@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Alert } from 'react-native';
 import { connect } from 'react-redux';
-
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import NaviBar from 'react-native-pure-navigation-bar';
 import { listRepos, selectCabinet } from './reducers/axiosReducer';
 //console.log(listRepos.toString())
 
@@ -11,10 +12,9 @@ class RepoList extends Component {
     this.props.listRepos('alexeyom');
   }
   renderItem = ({ item }) => (
-    <View
 
+    <View
       style = {item.id === this.props.selectedCabinet ? styles.selectedItem : styles.item }  
-      
     >
       <Text
         onPress={() => {
@@ -29,11 +29,21 @@ class RepoList extends Component {
     const { repos } = this.props;
     //console.log('was selected' + this.props.selectedCabinet);
     return (
-      <FlatList
-        style={styles.container}
-        data={repos}
-        renderItem={this.renderItem}
-      />
+      
+      <View style={{flex: 1}}>
+        <NaviBar
+          title='CustomTitle'
+          leftElement='left23'
+          onLeft = {() =>this.props.navigation.navigate('Calc')}
+        />
+        <FlatList
+          style={styles.container}
+          data={repos}
+          renderItem={this.renderItem}
+        />
+      </View>
+
+      
     );
   }
 }
@@ -41,7 +51,7 @@ class RepoList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: 'stretch',
+    //alignSelf: 'stretch',
   },
   item: {
     padding: 14,

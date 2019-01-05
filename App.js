@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
+import { createStackNavigator } from 'react-navigation';
 
 
 import {reducer} from './reducers/axiosReducer';
@@ -20,10 +21,41 @@ const client = axios.create({
 
 const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
 
+const AppNavigator = createStackNavigator(
+  {
+    Calc: {screen: SizeSelector },
+    Selection: {screen: RepoList },
+  },
+  {
+    initialRouteName: 'Selection'
+  }
+  );
 
 
 console.log(store.getState());
 
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={styles.container}>
+          <AppNavigator/>
+        </View>
+      </Provider>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    //marginTop: -25,
+    backgroundColor: '#fff',
+  },
+});
+
+
+/*
 export default class App extends Component {
   render() {
     return (
@@ -36,12 +68,4 @@ export default class App extends Component {
       </Provider>
     );
   }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 14,
-    backgroundColor: '#fff',
-  },
-});
+}*/
