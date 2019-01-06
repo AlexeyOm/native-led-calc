@@ -22,8 +22,8 @@ export function reducerA(state = {
   repos: [],
   loading: false,
   selectedCabinet: 0,
-  width: 0,
-  height: 0,
+  width: 1,
+  height: 1,
 }, action) {
 
   //console.log(state);
@@ -32,7 +32,9 @@ export function reducerA(state = {
       return { ...state, loading: true };
     case GET_REPOS_SUCCESS:
       //console.log(action.payload.data[0]);
-      return { ...state, loading: false, repos: action.payload.data };
+      let repos = action.payload.data.map( cabinet => { return {...cabinet, vendor: cabinet.vendor.brand}});
+      repos.sort( (x,y) => x.vendor < y.vendor );
+      return { ...state, loading: false, repos: repos };
     case GET_REPOS_FAIL:
       return {
         ...state,
@@ -43,10 +45,10 @@ export function reducerA(state = {
       return {...state, selectedCabinet: action.payload};
 
     case CHANGE_WIDTH:
-      return {...state, width: (state.width + action.payload < 0) ? 0 : state.width + action.payload}; 
+      return {...state, width: (state.width + action.payload < 1) ? 1 : state.width + action.payload}; 
 
     case CHANGE_HEIGHT:
-      return {...state, height: (state.height + action.payload < 0) ? 0 : state.height + action.payload};
+      return {...state, height: (state.height + action.payload < 1) ? 1 : state.height + action.payload};
     default:
       return state;
   }

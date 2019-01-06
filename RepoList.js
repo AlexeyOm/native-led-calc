@@ -6,6 +6,8 @@ import NaviBar from 'react-native-pure-navigation-bar';
 import { listRepos, selectCabinet } from './reducers/axiosReducer';
 //console.log(listRepos.toString())
 
+//NaviBar.default.props.style.navbarHeight = 30;
+
 
 class RepoList extends Component {
   componentDidMount() {
@@ -32,9 +34,10 @@ class RepoList extends Component {
       
       <View style={{flex: 1}}>
         <NaviBar
-          title='CustomTitle'
-          leftElement='left23'
+          title='Кабинет'
+          leftElement='Калькулятор'
           onLeft = {() =>this.props.navigation.navigate('Calc')}
+
         />
         <FlatList
           style={styles.container}
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
 
     let storedRepositories = state.reducerA.repos.map(repo => ({ key: repo.id.toString(), ...repo }));
+    console.log(state.reducerA.repos[1])
     return {
       repos: storedRepositories,
       selectedCabinet: state.reducerA.selectedCabinet,

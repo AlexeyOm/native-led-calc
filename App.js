@@ -12,7 +12,7 @@ import RepoList from './RepoList';
 import Result from './Result';
 import SizeSelector from './SizeSelector';
 
-//console.log(reducer.toString());
+//console.log(reducer.toString()); 
 
 const client = axios.create({
   baseURL: 'http://192.168.1.107:8000/editor',
@@ -27,12 +27,13 @@ const AppNavigator = createStackNavigator(
     Selection: {screen: RepoList },
   },
   {
-    initialRouteName: 'Selection'
+    initialRouteName: 'Selection',
+    headerMode: 'none',
   }
   );
 
 
-console.log(store.getState());
+//console.log(store.getState());
 
 export default class App extends Component {
   render() {
@@ -49,7 +50,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //marginTop: -25,
+    marginTop: 14,
     backgroundColor: '#fff',
   },
 });
